@@ -61,12 +61,12 @@
 ######### Código da gui para a tela do RecycleView #########
 
 ######### Código da gui para a tela de Menu com seus Widgets #########
-<menu>
+<menu>:
     BoxLayout:
         orientation: 'vertical'
         Label:
             size_hint: (1, 0.4)
-            text: 'CRUD SQLite \nPrincipais Operações em \n Banco de Dados \n\n Organizador de Livros'
+            text: 'CRUD SQLite \nPrincipais Operações em \nBanco de Dados \n\nOrganizador de Livros'
             halign: 'center'
         Button:
             size_hint: (1, 0.2)
@@ -79,7 +79,7 @@
         Button:
             size_hint: (1, 0.2)
             text: 'Selecionar Livro'
-            on_press: root.manager.current='read'
+            on_press: root.manager.current = 'read'
         Button:
             size_hint: (1, 0.2)
             text: 'Atualizar Livro'
@@ -87,7 +87,8 @@
         Button:
             size_hint: (1, 0.2)
             text: 'Excluir Livro'
-            on_press: root.manager.current ='delete'
+            on_press: root.manager.current = 'delete'
+
  
      
 </menu>

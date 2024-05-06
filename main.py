@@ -107,22 +107,25 @@ class Delete_Sc(Screen):
 class CrudKivy(App):                   
     def criar_tabela(self):
         pass
-    def selecionar_todos_livros(self):       
-        pass
-    def inserir_livro(self, txt_tit, txt_aut, txt_dat, txt_pag, txt_npg):
-        pass
-    def selecionar_livro(self, cid, sc):
-        pass
-    def atualizar_livro(self, upd_id, upd_tit, upd_aut, upd_dat, upd_pat, upd_tpg):
-        pass
-    def deletar_livro(self, id):
-        pass
+    
     def build(self):
         App.title = "Organizador de Leituras"
         Window.size = (320, 480)
-        self.criar_tabela()
-        self.sm = ScManager(transition=WipeTransition())                   
+        
+        # Criar uma instância do ScreenManager
+        self.sm = ScreenManager(transition=WipeTransition())  
+        
+        # Adicionar as telas ao ScreenManager
+        self.sm.add_widget(RV(name='data_rv'))
+        self.sm.add_widget(Menu(name='menu'))
+        self.sm.add_widget(Create_Sc(name='create'))
+        self.sm.add_widget(Read_Sc(name='read'))
+        self.sm.add_widget(Update_Sc(name='update'))
+        self.sm.add_widget(Delete_Sc(name='delete'))
+        
+        # Definir a tela inicial
         self.sm.current = "menu"
+        
         return self.sm
 CrudKivy().run()
 ######### Estrutura da classe principal do projeto e sua execução #########
@@ -187,7 +190,7 @@ def atualizar_livro(self, upd_id, upd_tit, upd_aut, upd_dat, upd_pat, upd_tpg):
         if upd_tit != "" and upd_aut != "" and upd_dat != "" and upd_pat != "" and upd_tpg != "":
             self.cursor.execute("UPDATE tb_livros SET (titulo, autor, data_leitura, pagina_atual, n_paginas) = (?,?,?,?,?) WHERE id = ?", (upd_tit, upd_aut, upd_dat, upd_pat, upd_tpg, upd_id,))
             self.conexao.commit()
-            upd.lbl_resposta = "Livro Atualizado com Sucesso!"
+            upd.lbl_resposta.text = "Livro Atualizado com Sucesso!"
             print("Dados atualizados com Sucesso!")
         else:
             upd.lbl_resposta.text = "Todos campos devem ser preenchidos"
